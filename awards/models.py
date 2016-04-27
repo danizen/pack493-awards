@@ -1,15 +1,30 @@
 from django.db import models
+from django.conf import settings
 
 
-class Den(models.Model):
+class ReprMixin():
+    
+    def __repr__(self):
+        return '<'+self.__class__.__name__+': '+self.name+'>'
+
+    def __str__(self):
+        return self.name
+         
+
+class Den(ReprMixin, models.Model):
     '''
     Each Den has a leader who is a user who may administrate the Den,
     a list of Scouts, and a list of potential Adventures
     '''
     name = models.CharField(max_length=64, unique=True)
+    leader = models.OneToOneField(
+                settings.AUTH_USER_MODEL, 
+                null=True, 
+                on_delete=models.SET_NULL
+            )
 
 
-class Adventure(models.Model):
+class Adventure(ReprMixin, models.Model):
     '''
     An Adventure belongs to a Den. Each Adventure may be required or optional.
     '''
@@ -18,7 +33,7 @@ class Adventure(models.Model):
     required = models.BooleanField(default=False)
 
 
-class Scout(models.Model):
+class Scout(ReprMixin, models.Model):
     '''
     A Scout is a member of a Den, and earns Awards by having Adventures
     '''
@@ -29,7 +44,7 @@ class Scout(models.Model):
                                     through_fields=('scout', 'adventure'))
 
 
-class Award(models.Model):
+class Award(ReprMixin, models.Model):
     '''
     A scout earns Awards for completing Adventures. 
     These awards are earned, reported, purchased, and delivered.
