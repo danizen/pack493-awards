@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     # 3rd party apps
     'rest_framework',
     # my apps
+    'accounts',
     'awards',
 )
 
@@ -105,7 +106,6 @@ ALLOWED_HOSTS = ['*']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-BASE_DIR = dirname(dirname(abspath(__file__)))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 

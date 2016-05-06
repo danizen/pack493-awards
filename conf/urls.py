@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from awards.views import den_list_view, den_scouts_view, den_awards_view
-#from accounts.views import login_view, profile_view, logout_view, register_view, activate_view
+from awards.views import den_list_view, show_den_view, scout_list_view, show_scout_view
+from accounts.views import login_view, profile_view, logout_view
 
 
 def home(request):
@@ -11,14 +11,12 @@ def home(request):
 
 urlpatterns = [
     url(r'^$', home, name='home'),
-    url(r'^den/list/?$', den_list_view, name='den-list'),
-    url(r'^den/([^/]+)/scouts/?$', den_scouts_view, name='den-scouts'),
-    #url(r'^den/([^/]+)/scouts/([0-9]+)/?$', den_scout_view, name='den-scout'),
-    url(r'^den/([^/]+)/awards/?$', den_awards_view, name='den-awards'),
-    #url(r'^account/signin/?$', login_view, name='signin'),
-    #ull(r'^account/profile/?$', profile_view, name='profile'),
-    #url(r'^account/signout/?$', logout_view, name='signout'),
-    #url(r'^account/register/?$', register_view, name='signup'),
-    #url(r'^account/activate/?$', activate_view, name='activate'),
+    url(r'^den/list/$', den_list_view, name='den-list'),
+    url(r'^den/(\d+)/$', show_den_view, name='show-den'),
+    url(r'^scout/list/$', scout_list_view, name='scout-list'),
+    url(r'^scout/(\d+)/$', show_scout_view, name='show-scout'),
+    url(r'^accounts/profile/$', profile_view, name='profile'),
+    url(r'^accounts/logout/$', logout_view, name='logout'),
+    url(r'^accounts/login/$', login_view, name='login')
 ]
 
