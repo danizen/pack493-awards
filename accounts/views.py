@@ -23,15 +23,15 @@ def _get_login_redirect_url(request, redirect_to):
 @sensitive_post_parameters()
 @csrf_protect
 @never_cache
-def login(request, template_name='accounts/login.html',
-          redirect_field_name=REDIRECT_FIELD_NAME,
-          authentication_form=AuthenticationForm):
+def login_view(request, template_name='accounts/login.html',
+            redirect_field_name=REDIRECT_FIELD_NAME,
+            authentication_form=AuthenticationForm):
     """
     Displays the login form and handles the login action.
     """
     redirect_to = request.POST.get(redirect_field_name, request.GET.get(redirect_field_name, ''))
 
-	if request.method == "POST":
+    if request.method == "POST":
         form = authentication_form(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
@@ -48,7 +48,7 @@ def login(request, template_name='accounts/login.html',
 
 
 @never_cache
-def logout(request, next_page=None,
+def logout_view(request, next_page=None,
            template_name='accounts/logged_out.html',
            redirect_field_name=REDIRECT_FIELD_NAME):
     """
