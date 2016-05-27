@@ -9,12 +9,17 @@
       </button>
       <a class="navbar-brand" href="{% url 'home' %}">Pack493 Awards</a>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
+    <div ="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
+      {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+          <li><a href="{% url 'logout' %}">Sign-out</a></li>
+        </ul>
+      {% endif %}
     </div><!--/.nav-collapse -->
   </div>
 </nav>

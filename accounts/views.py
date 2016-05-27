@@ -1,4 +1,5 @@
 from django.shortcuts import render, resolve_url
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -32,12 +33,12 @@ def login_view(request, template_name='accounts/login.html',
     redirect_to = request.POST.get(redirect_field_name, request.GET.get(redirect_field_name, ''))
 
     if request.method == "POST":
-        form = authentication_form(request, data=request.POST)
+        form = authentication_form(data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
             return HttpResponseRedirect(_get_login_redirect_url(request, redirect_to))
     else:
-        form = authentication_form(request)
+        form = authentication_form()
 
     context = {
         'form': form,
@@ -85,4 +86,4 @@ def profile_view(request):
 	'''
 	Show the profile and privileges of the user
 	'''
-	render(request, 'registration/profile.html')
+	return render(request, 'accounts/profile.html')
