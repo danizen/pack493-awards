@@ -8,29 +8,19 @@
       <table class='table'> 
         <thead>
           <tr>
-            <th>Den Name</th>
-            <th>Scouts</th>
-            <th>Adventures</th>
+            <th>Scout</th>
           </tr>
         </thead>
         <tbody>
-          {% for den in object_list %}
+          {% for scout in object_list %}
             <tr>
               <td>
-                <a href="{% url 'den-scouts' den.pk %}">{{ den.name }}</a>
+                <a href="{% url 'show-scout' scout.pk %}">{{ scout.name }}</a>
               </td>
-              <td>{{ den.scout_set.count }}</td>
-              <td>{{ den.adventure_set.count }}</td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      {% if object_list %}
-        <ul>
-        </ul>
-      {% else %}
-        <span>Sorry, no Dens yet.</span>
-      {% endif %}
     </div>
   </div>
 </div>

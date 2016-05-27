@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from awards.views import den_list_view, show_den_view, scout_list_view, show_scout_view
+from django.contrib.auth.decorators import login_required, permission_required
+from awards.views import DensView, DenScoutsView, scout_list_view, show_scout_view
 from accounts.views import login_view, profile_view, logout_view
 
 
@@ -20,8 +21,12 @@ def contact_view(request):
 
 urlpatterns = [
     url(r'^$', home, name='home'),
-    url(r'^den/list/$', den_list_view, name='den-list'),
-    url(r'^den/(\d+)/$', show_den_view, name='show-den'),
+    url(r'^den/list/$',
+        login_required(DensView.as_view()),
+        name='den-list'),
+    url(r'^den/(\d+)/scouts/$',
+        login_required(DenScoutsView.as_view()),
+        name='den-scouts'),
     url(r'^scout/list/$', scout_list_view, name='scout-list'),
     url(r'^scout/(\d+)/$', show_scout_view, name='show-scout'),
     url(r'^about/$', about_view, name='about'),
