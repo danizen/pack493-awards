@@ -21,6 +21,16 @@
           {% endfor %}
         </tbody>
       </table>
+      <div class="btn-group" role="group" aria-label="actions">
+        <a class="btn btn-primary" href="{% url 'new-scout' %}">
+          <span class="glyphicon glyphicon-plus"></span>
+          <span class="sr-only">Add Scout</span>
+        </a>
+      </div>
+      {% if object_list %}
+      {% else %}
+        <span>Sorry, no Scouts yet.</span>
+      {% endif %}
     </div>
   </div>
 </div>

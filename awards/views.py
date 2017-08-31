@@ -32,6 +32,11 @@ class DenScoutsView(ListView):
 
 
 @login_required
+def new_scout_view(request):
+    return render(request, 'awards/newscout.html')
+
+
+@login_required
 def show_scout_view(request):
     return render(request, 'awards/ascout.html')
 
