@@ -1,10 +1,12 @@
 from django.conf.urls import include, url
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, permission_required
 from awards.views import (
-    DensView, DenScoutsView, scout_list_view, show_scout_view, new_scout_view,
+    DensView, DenScoutsView, scout_list_view, 
+    NewScoutView, UpdateScoutView, DeleteScoutView,
 )
 from accounts.views import login_view, profile_view, logout_view
 
@@ -23,18 +25,24 @@ def contact_view(request):
 
 urlpatterns = [
     url(r'^$', home, name='home'),
-    url(r'^den/list/$',
-        login_required(DensView.as_view()),
-        name='den-list'),
-    url(r'^den/(\d+)/scouts/$', login_required(DenScoutsView.as_view()),
-        name='den-scouts'),
+    url(r'^den/list/$', DensView.as_view(), name='den-list'),
+    url(r'^den/(\d+)/scouts/$', DenScoutsView.as_view(), name='den-scouts'),
     url(r'^scout/list/$', scout_list_view, name='scout-list'),
-    url(r'^scout/(\d+)/$', show_scout_view, name='show-scout'),
-    url(r'^scout/$', new_scout_view, name='new-scout'), 
+    url(r'^scout/(\d+)/$', UpdateScoutView.as_view(), name='edit-scout'),
+    url(r'^scout/$', NewScoutView.as_view(), name='new-scout'), 
+    url(r'^scout/(\d+)/delete/$', DeleteScoutView.as_view(), name='delete-scout'), 
     url(r'^about/$', about_view, name='about'),
     url(r'^contact/$', contact_view, name='contact'),
     url(r'^accounts/profile/$', profile_view, name='profile'),
     url(r'^accounts/logout/$', logout_view, name='logout'),
     url(r'^accounts/login/$', login_view, name='login')
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 

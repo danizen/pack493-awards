@@ -49,7 +49,7 @@ class Scout(ReprMixin, models.Model):
     A Scout is a member of a Den, and earns Awards by having Adventures
     '''
     name = models.CharField(max_length=64, unique=True)
-    den = models.ForeignKey(Den, on_delete=models.CASCADE)
+    den = models.ForeignKey(Den, on_delete=models.CASCADE, related_name='scouts')
     awards = models.ManyToManyField(Adventure,
                                     through='Award',
                                     through_fields=('scout', 'adventure'))

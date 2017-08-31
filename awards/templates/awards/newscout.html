@@ -1,1 +1,13 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h1 class="panel-title">New Scout</h1></div>
+    <div class="panel-body">
+      {% crispy form %}
+    </div>
+  </div>
+</div>
+{% endblock %}
