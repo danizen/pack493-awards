@@ -9,6 +9,12 @@ class ReprMixin():
 
     def __str__(self):
         return self.name
+
+
+class DenManager(models.Manager):
+
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
          
 
 class Den(ReprMixin, models.Model):
@@ -16,12 +22,17 @@ class Den(ReprMixin, models.Model):
     Each Den has a leader who is a user who may administrate the Den,
     a list of Scouts, and a list of potential Adventures
     '''
+    objects = DenManager()
+
     name = models.CharField(max_length=64, unique=True)
     leader = models.OneToOneField(
                 settings.AUTH_USER_MODEL, 
                 null=True, 
                 on_delete=models.SET_NULL
             )
+
+    def natural_key(self):
+        return self.name
 
 
 class Adventure(ReprMixin, models.Model):

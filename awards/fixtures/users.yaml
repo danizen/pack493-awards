@@ -1,0 +1,28 @@
+- model: auth.user
+  fields:
+    password: pbkdf2_sha256$36000$Cf2PW5joxhaZ$ip512QwJM6y78it4uMbASyEEt6z4hezr3rIheCSoJWg=
+    last_login: 2017-08-31 03:22:01.343100+00:00
+    is_superuser: true
+    username: dan
+    first_name: ''
+    last_name: ''
+    email: dansmood@gmail.com
+    is_staff: true
+    is_active: true
+    date_joined: 2017-08-31 03:21:37.984986+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  fields:
+    password: ''
+    last_login: null
+    is_superuser: false
+    username: jonathan
+    first_name: Jonathan
+    last_name: Jacobs
+    email: jonathan.jacobs@gmail.com
+    is_staff: false
+    is_active: true
+    date_joined: 2017-08-31 03:26:01.221728+00:00
+    groups: []
+    user_permissions: []

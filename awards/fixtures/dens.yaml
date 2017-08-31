@@ -1,0 +1,8 @@
+- model: awards.den
+  fields:
+    name: Tigers
+    leader: [dan]
+- model: awards.den
+  fields:
+    name: Webelos
+    leader: [jonathan]
